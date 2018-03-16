@@ -19,24 +19,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNot.not;
 
-
 /**
  * Created by ahemenson on 15/03/18.
  */
 
 public class LoginRobot {
 
-    public void gotoLoginPage() {
-        sleep();
+    public void gotoLoginScreen() {
         onView(allOf(ViewMatchers.withId(R.id.login), withText("Log in"))).perform(click());
     }
 
-    public void enterNum(String cellphoneNumber) {
+    public void enterPhoneNumber(String cellphoneNumber) {
         onView(allOf(withId(R.id.input_num_login))).perform(click());
         onView(allOf(withId(R.id.input_num_login))).perform(replaceText(cellphoneNumber), closeSoftKeyboard());
     }
 
-    public void enterLogin(String pass) {
+    public void enterPassWord(String pass) {
         onView(allOf(withId(R.id.input_pass_login))).perform(click());
         onView(allOf(withId(R.id.input_pass_login))).perform(replaceText(pass), closeSoftKeyboard());
     }
@@ -44,23 +42,17 @@ public class LoginRobot {
     public void clickLoginButton() {
         onView(allOf(withId(R.id.ok_login), withText("Log in"))).perform(click());
         pressBack();
-        sleep();
 
     }
-
-    private void sleep() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public void checkErrorNotificationMessager(ActivityTestRule<Splash> mActivityTestRule, String message) {
         onView(withText(message))
                 .inRoot(withDecorView(not(mActivityTestRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
+    }
+
+    public void checkHomeScreen() {
+        onView(allOf(withText("Travel Mate"))).check(matches(withText("Travel Mate")));
     }
 }
 

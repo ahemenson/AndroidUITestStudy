@@ -37,52 +37,20 @@ public class SignOutTest {
 
     @Test
     public void signOutTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+
+        sleep();
+
+    }
+
+    public void sleep() {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Travel Guide"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.nav_view),
-                                        0)),
-                        8),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withText("LoginActivity"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("LoginActivity")));
-
     }
 
-    private static Matcher<View> childAtPosition(
+    public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {
