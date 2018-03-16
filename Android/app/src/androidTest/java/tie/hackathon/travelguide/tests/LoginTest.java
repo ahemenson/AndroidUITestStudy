@@ -1,7 +1,8 @@
-package tie.hackathon.travelguide;
+package tie.hackathon.travelguide.tests;
 
 
 import android.content.Context;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -18,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
+import tie.hackathon.travelguide.Splash;
 import tie.hackathon.travelguide.espressorobot.LoginRobot;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
@@ -43,14 +46,10 @@ public class LoginTest {
     private static final String INVALID_USER1_PASS = "@";
     private static final String ErrorToastMessage = "Invalid Password or number";
 
-    private Context mcontext = getInstrumentation().getContext();
-
     LoginRobot loginPage;
-
 
     @Rule
     public ActivityTestRule<Splash> mActivityTestRule = new ActivityTestRule<>(Splash.class);
-
 
     @Before
     public void setUp() {
@@ -58,68 +57,61 @@ public class LoginTest {
     }
 
     /**
-     * XXX XXX XXX
-     * Test Case: XX.
+     * Check unsuccessful Login using an invalid phone number
+     * Test Case: 10.
      */
     @Test
     public void checkLoginWithInvalidPass() {
-        sleep();
+        sleep(2000);
         loginPage.gotoLoginScreen();
         loginPage.enterPhoneNumber(USER1_CELLPHONE);
         loginPage.enterPassWord(INVALID_USER1_PASS);
         loginPage.clickLoginButton();
-        sleep();
+        loginPage.closeAlertDialog();
+        sleep(1000);
         loginPage.checkErrorNotificationMessager(mActivityTestRule, ErrorToastMessage);
     }
 
     /**
-     * XXX XXX XXX
-     * Test Case: XX.
+     * Check unsuccessful Login using an invalid phone number
+     * Test Case: 09.
      */
-
     @Test
     public void checkLoginWithInvalidCellphone() {
-        sleep();
+        sleep(2000);
         loginPage.gotoLoginScreen();
-        loginPage.enterPassWord(INVALID_USER1_CELLPHONE);
         loginPage.enterPhoneNumber(USER1_PASS);
+        loginPage.enterPassWord(INVALID_USER1_CELLPHONE);
         loginPage.clickLoginButton();
-        sleep();
+        loginPage.closeAlertDialog();
+        sleep(1000);
         loginPage.checkErrorNotificationMessager(mActivityTestRule, ErrorToastMessage);
     }
 
+    /**
+     * Login Sucessful using valid data (phone and password)
+     * Test Case: 06
+     */
     @Test
     public void loginSucessful() {
-        sleep();
+        sleep(2000);
         loginPage.gotoLoginScreen();
-        loginPage.enterPassWord(INVALID_USER1_CELLPHONE);
-        loginPage.enterPhoneNumber(USER1_PASS);
+        loginPage.enterPhoneNumber(USER1_CELLPHONE);
+        loginPage.enterPassWord(USER1_PASS);
         loginPage.clickLoginButton();
-        sleep();
         loginPage.checkHomeScreen();
+        sleep(1000);
     }
 
-
-    private void sleep() {
+    private void sleep(long time) {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void clearPreferences() {
-        try {
-            // clearing app data
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec("pm clear YOUR_APP_PACKAGE_GOES HERE");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static Matcher<View> childAtPosition(
+    public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {

@@ -1,4 +1,4 @@
-package tie.hackathon.travelguide;
+package tie.hackathon.travelguide.tests;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -13,11 +13,19 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+
+import tie.hackathon.travelguide.Splash;
+import tie.hackathon.travelguide.espressorobot.LoginRobot;
+import tie.hackathon.travelguide.espressorobot.SignOutRobot;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -28,18 +36,30 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignOutTest {
+
+    SignOutRobot signOutRobot;
 
     @Rule
     public ActivityTestRule<Splash> mActivityTestRule = new ActivityTestRule<>(Splash.class);
 
+    @Before
+    public void setUp() {
+        signOutRobot = new SignOutRobot();
+    }
+
+    /**
+     * Logout Sucessful
+     * Test Case: XX.
+     */
     @Test
     public void signOutTest() {
-
         sleep();
-
+        signOutRobot.clickMenu();
+        signOutRobot.clickLogoutOptionOnMenu();
+        signOutRobot.checkLoginScreen();
     }
 
     public void sleep() {

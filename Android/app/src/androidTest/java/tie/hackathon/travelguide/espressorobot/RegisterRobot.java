@@ -1,6 +1,6 @@
 package tie.hackathon.travelguide.espressorobot;
 
-import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 
 import tie.hackathon.travelguide.R;
@@ -14,33 +14,36 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNot.not;
 
 /**
- * Created by ahemenson on 15/03/18.
+ * Created by ahemenson on 16/03/18.
  */
 
-public class LoginRobot {
+public class RegisterRobot {
 
-    public void gotoLoginScreen() {
-        onView(allOf(ViewMatchers.withId(R.id.login), withText("Log in"))).perform(click());
+    public void enterName(String name) {
+        onView(allOf(withId(R.id.input_name_signup))).perform(click());
+        onView(allOf(withId(R.id.input_name_signup))).perform(replaceText(name), closeSoftKeyboard());
     }
 
-    public void enterPhoneNumber(String cellphoneNumber) {
-        onView(allOf(withId(R.id.input_num_login))).perform(click());
-        onView(allOf(withId(R.id.input_num_login))).perform(replaceText(cellphoneNumber), closeSoftKeyboard());
+    public void enterPhoneNumber(String phoneNumber) {
+        onView(allOf(withId(R.id.input_num_signup))).perform(click());
+        onView(allOf(withId(R.id.input_num_signup))).perform(replaceText(phoneNumber), closeSoftKeyboard());
     }
 
-    public void enterPassWord(String pass) {
-        onView(allOf(withId(R.id.input_pass_login))).perform(click());
-        onView(allOf(withId(R.id.input_pass_login))).perform(replaceText(pass), closeSoftKeyboard());
+    public void enterPassWord(String password) {
+        onView(allOf(withId(R.id.input_pass_signup))).perform(click());
+        onView(allOf(withId(R.id.input_pass_signup))).perform(replaceText(password), closeSoftKeyboard());
     }
 
-    public void clickLoginButton() {
-        onView(allOf(withId(R.id.ok_login), withText("Log in"))).perform(click());
+    public void clickSignUpButton() {
+        onView(allOf(withId(R.id.ok_signup), withText("Signup"))).perform(click());
     }
 
     public void closeAlertDialog() {
@@ -53,13 +56,4 @@ public class LoginRobot {
                 .check(matches(isDisplayed()));
     }
 
-    public void checkHomeScreen() {
-        onView(allOf(withText("Travel Mate"))).check(matches(withText("Travel Mate")));
-    }
 }
-
-
-
-
-
-

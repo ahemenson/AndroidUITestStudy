@@ -2,9 +2,6 @@ package tie.hackathon.travelguide.espressorobot;
 
 
 import android.support.test.espresso.ViewInteraction;
-import android.view.View;
-
-import org.hamcrest.core.IsInstanceOf;
 
 import tie.hackathon.travelguide.R;
 
@@ -16,7 +13,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static tie.hackathon.travelguide.SignOutTest.childAtPosition;
+import static org.hamcrest.Matchers.is;
+import static tie.hackathon.travelguide.tests.SignOutTest.childAtPosition;
 
 /**
  * Created by eminho on 15/03/18.
@@ -28,7 +26,7 @@ public class SignOutRobot {
         onView(allOf(withContentDescription("Travel Guide"))).perform(click());
     }
 
-    public  void clickLogoutOption() {
+    public  void clickLogoutOptionOnMenu() {
         ViewInteraction navigationMenuItemView = onView(allOf(childAtPosition(
                 allOf(withId(R.id.design_navigation_view),
                         childAtPosition(
@@ -41,6 +39,10 @@ public class SignOutRobot {
 
     public void checkLoginScreen() {
         onView(allOf(withText("LoginActivity"))).check(matches(withText("LoginActivity")));
+    }
+
+    public void checkHomeScreen() {
+        onView(allOf(withText("Travel Mate"))).check(matches(withText("Travel Mate")));
     }
 
 
