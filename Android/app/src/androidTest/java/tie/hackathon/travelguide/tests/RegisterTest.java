@@ -117,7 +117,7 @@ public class RegisterTest {
         registerRobot.closeAlertDialog();
         sleep(1000);
         registerRobot.checkErrorNotificationMessager(mActivityTestRule, ErrorToastMessage);
-        sleep(500);
+        sleep(600);
     }
 
     private void sleep(long time) {
