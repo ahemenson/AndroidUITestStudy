@@ -1,7 +1,6 @@
 package tie.hackathon.travelguide.tests;
 
 
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -20,18 +19,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import tie.hackathon.travelguide.Splash;
-import tie.hackathon.travelguide.espressorobot.LoginRobot;
 import tie.hackathon.travelguide.espressorobot.RegisterRobot;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static java.lang.Thread.sleep;

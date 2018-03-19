@@ -1,6 +1,5 @@
 package tie.hackathon.travelguide.espressorobot;
 
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 
 import tie.hackathon.travelguide.R;
@@ -14,7 +13,6 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
