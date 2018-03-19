@@ -34,6 +34,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static java.lang.Thread.sleep;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
@@ -63,7 +64,7 @@ public class RegisterTest {
      * Test Case: 03.
      */
     @Test
-    public void checkRegisterEmptyTest() {
+    public void checkRegisterEmptyFailed() throws InterruptedException {
         sleep(2000);
         registerRobot.clickSignUpButton();
         registerRobot.closeAlertDialog();
@@ -77,7 +78,7 @@ public class RegisterTest {
      * Test Case: 04.
      */
     @Test
-    public void checkRegisterEmptyNameFieldTest() {
+    public void checkRegisterEmptyNameFieldFailed() throws InterruptedException {
         sleep(2000);
         registerRobot.enterPhoneNumber(USER1_CELLPHONE);
         registerRobot.enterPassWord(USER1_PASS);
@@ -93,13 +94,13 @@ public class RegisterTest {
      * Test Case: 05.
      */
     @Test
-    public void checkRegisterEmptyPhoneNumberFieldTest() {
+    public void checkRegisterEmptyPhoneNumberFieldFailed() throws InterruptedException {
         sleep(2000);
         registerRobot.enterName(USER1_NAME);
         registerRobot.enterPassWord(USER1_PASS);
         registerRobot.clickSignUpButton();
         registerRobot.closeAlertDialog();
-        sleep(1000);
+        sleep(2000);
         registerRobot.checkErrorNotificationMessager(mActivityTestRule, ErrorToastMessage);
         sleep(500);
     }
@@ -109,23 +110,15 @@ public class RegisterTest {
      * Test Case: 06.
      */
     @Test
-    public void checkRegisterEmptyPasswordFieldTest() {
+    public void checkRegisterEmptyPasswordFieldFailed() throws InterruptedException {
         sleep(2000);
         registerRobot.enterName(USER1_NAME);
         registerRobot.enterPhoneNumber(USER1_CELLPHONE);
         registerRobot.clickSignUpButton();
         registerRobot.closeAlertDialog();
-        sleep(1000);
+        sleep(2000);
         registerRobot.checkErrorNotificationMessager(mActivityTestRule, ErrorToastMessage);
         sleep(600);
-    }
-
-    private void sleep(long time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private static Matcher<View> childAtPosition(

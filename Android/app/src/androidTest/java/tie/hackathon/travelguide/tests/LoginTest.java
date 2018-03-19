@@ -19,6 +19,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import static java.lang.Thread.sleep;
 
 import tie.hackathon.travelguide.Splash;
 import tie.hackathon.travelguide.espressorobot.LoginRobot;
@@ -61,7 +62,8 @@ public class LoginTest {
      * Test Case: 10.
      */
     @Test
-    public void checkLoginWithInvalidPass() {
+    public void checkLoginWithInvalidPassFailed() throws InterruptedException {
+
         sleep(2000);
         loginPage.gotoLoginScreen();
         loginPage.enterPhoneNumber(USER1_CELLPHONE);
@@ -77,7 +79,7 @@ public class LoginTest {
      * Test Case: 09.
      */
     @Test
-    public void checkLoginWithInvalidCellphone() {
+    public void checkLoginWithInvalidCellphoneFailed() throws InterruptedException {
         sleep(2000);
         loginPage.gotoLoginScreen();
         loginPage.enterPhoneNumber(USER1_PASS);
@@ -93,7 +95,7 @@ public class LoginTest {
      * Test Case: 06
      */
     @Test
-    public void loginSucessful() {
+    public void loginSucessful() throws InterruptedException {
         sleep(2000);
         loginPage.gotoLoginScreen();
         loginPage.enterPhoneNumber(USER1_CELLPHONE);
@@ -103,13 +105,7 @@ public class LoginTest {
         sleep(1000);
     }
 
-    private void sleep(long time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

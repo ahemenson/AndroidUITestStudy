@@ -33,6 +33,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static java.lang.Thread.sleep;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
@@ -55,19 +56,11 @@ public class SignOutTest {
      * Test Case: XX.
      */
     @Test
-    public void signOutTest() {
-        sleep();
+    public void signOutTest() throws InterruptedException {
+        sleep(2000);
         signOutRobot.clickMenu();
         signOutRobot.clickLogoutOptionOnMenu();
         signOutRobot.checkLoginScreen();
-    }
-
-    public void sleep() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public static Matcher<View> childAtPosition(
