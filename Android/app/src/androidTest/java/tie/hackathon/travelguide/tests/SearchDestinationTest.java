@@ -36,6 +36,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static java.lang.Thread.sleep;
@@ -82,7 +83,7 @@ public class SearchDestinationTest {
         sleep(1000);
         searchDestinationRobot.enterSearch("Mum");
         sleep(1000);
-        searchDestinationRobot.checkDestinationDisplayed(mActivityTestRule, "Mumbai");
+        searchDestinationRobot.checkDestinationSuggestionIsDisplayed(mActivityTestRule, "Mumbai");
         sleep(100);
     }
 
@@ -97,8 +98,8 @@ public class SearchDestinationTest {
         sleep(1000);
         searchDestinationRobot.enterSearch("Che");
         sleep(1000);
-        searchDestinationRobot.checkDestinationDisplayed(mActivityTestRule, "Chennai");
-        searchDestinationRobot.checkDestinationDisplayed(mActivityTestRule, "Cherkassy");
+        searchDestinationRobot.checkDestinationSuggestionIsDisplayed(mActivityTestRule, "Chennai");
+        searchDestinationRobot.checkDestinationSuggestionIsDisplayed(mActivityTestRule, "Cherkassy");
         sleep(500);
     }
 
@@ -110,7 +111,7 @@ public class SearchDestinationTest {
         sleep(1000);
         searchDestinationRobot.enterSearch("bangalore");
         sleep(1000);
-        searchDestinationRobot.checkDestinationisNotDisplayed(mActivityTestRule, "Bgalore");
+        searchDestinationRobot.checkDestinationisSuggestionNotIsDisplayed(mActivityTestRule, "Bgalore");
         sleep(500);
     }
 
@@ -119,13 +120,13 @@ public class SearchDestinationTest {
      * @throws InterruptedException
      */
     @Test
-    public void findUsingUpperCaseLetters() throws InterruptedException {
+    public void searchUsingUpperCaseLetters() throws InterruptedException {
         sleep(2000);
         searchDestinationRobot.clickSearchField();
         sleep(1000);
         searchDestinationRobot.enterSearch("Agra".toUpperCase());
         sleep(1000);
-        searchDestinationRobot.checkDestinationDisplayed(mActivityTestRule, "Agra");
+        searchDestinationRobot.checkDestinationSuggestionIsDisplayed(mActivityTestRule, "Agra");
         sleep(500);
     }
 
@@ -134,17 +135,45 @@ public class SearchDestinationTest {
      * @throws InterruptedException
      */
     @Test
-    public void findUsingLowerCaseLetters() throws InterruptedException {
+    public void searchUsingLowerCaseLetters() throws InterruptedException {
         sleep(2000);
         searchDestinationRobot.clickSearchField();
         sleep(1000);
         searchDestinationRobot.enterSearch("Agra".toLowerCase());
         sleep(1000);
-        searchDestinationRobot.checkDestinationDisplayed(mActivityTestRule, "Agra");
+        searchDestinationRobot.checkDestinationSuggestionIsDisplayed(mActivityTestRule, "Agra");
         sleep(500);
     }
 
-    private static Matcher<View> childAtPosition(
+    @Test
+    public void searchDestinyAndClickInSuggestion() throws InterruptedException {
+        sleep(2000);
+        searchDestinationRobot.clickSearchField();
+        sleep(1000);
+        searchDestinationRobot.enterSearch("delhi");
+        sleep(1000);
+        searchDestinationRobot.tapInSuggestion(mActivityTestRule, "Delhi");
+        // check
+        sleep(1500);
+        searchDestinationRobot.checkDestinationScreenOpened("Delhi");
+    }
+
+    @Test
+    public void searchDestinyAndClickInSuggestionAndReturntoHome() throws InterruptedException {
+        sleep(2000);
+        searchDestinationRobot.clickSearchField();
+        sleep(1000);
+        searchDestinationRobot.enterSearch("agra");
+        sleep(1000);
+        searchDestinationRobot.tapInSuggestion(mActivityTestRule, "Agra");
+        sleep(1000);
+        searchDestinationRobot.clickReturnButton();
+        sleep(1000);
+        // check
+        searchDestinationRobot.checkReturnedToHomeScreen();
+    }
+
+    public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {
